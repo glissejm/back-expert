@@ -5,7 +5,7 @@ const questionSchema = new Schema({
     type: String,
     required: true,
   },
-  topic: {
+  course: {
     type: String,
     required: true,
   },
@@ -13,7 +13,26 @@ const questionSchema = new Schema({
     type: String,
     required: true,
   },
-  //many items are missing
+  content: {
+    type: Object,
+    required: true,
+  },
+  solution: {
+    type: Object,
+    required: true,
+  },
+  video: {
+    type: String,
+    required: true,
+  },
+  option: {
+    type: Object,
+    required: true,
+  },
+  status: {
+    type: Boolean,
+    required: true,
+  }
 });
 
 const Question = model("Question", questionSchema);
