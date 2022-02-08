@@ -1,9 +1,21 @@
 import { model, Schema } from "mongoose";
 
-const answerSchema = new Schema({
+const solutionSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    content: {
+        type: Object,
+        required: true,
+    },
+    showed: {
+        type: Boolean,
+        required: true,
+    },
   
 });
 
-const Answer = model("Answer", answerSchema);
+const Solution = model("Solution", solutionSchema);
 
-export default Answer;
+export default Solution;
