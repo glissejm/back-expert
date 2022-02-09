@@ -6,7 +6,7 @@ const questionSchema = new Schema({
     required: true,
   },
   course: {
-    type: String,
+    type: [{ type: Schema.Types.ObjectId, ref: "Course" }],
     required: true,
   },
   difficult: {
@@ -18,7 +18,7 @@ const questionSchema = new Schema({
     required: true,
   },
   solution: {
-    type: Object,
+    type: [{ type: Schema.Types.ObjectId, ref: "Solution" }],
     required: true,
   },
   video: {
@@ -26,7 +26,7 @@ const questionSchema = new Schema({
     required: true,
   },
   option: {
-    type: Object,
+    type: [{ type: Schema.Types.ObjectId, ref: "Option" }],
     required: true,
   },
   status: {
