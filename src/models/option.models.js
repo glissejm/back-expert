@@ -1,11 +1,7 @@
 import { model, Schema } from "mongoose";
 
 const optionSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  content: {
+  body: {
     type: Object,
     required: true,
   },
