@@ -2,7 +2,7 @@ const { model, Schema } = require('mongoose');
 
 const paymentSchema = new Schema(
   {
-    users: {
+    user: {
       type: [
         {
           type: Schema.Types.ObjectId,
@@ -10,7 +10,7 @@ const paymentSchema = new Schema(
         },
       ],
     },
-    duration: Number,
+    status: Boolean,
   },
   {
     timestamps: true,
