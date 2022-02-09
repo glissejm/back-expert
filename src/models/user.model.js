@@ -13,9 +13,8 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  payments: {
-    type: Schema.Types.ObjectId,
-    ref: "Payment",
+  payment: {
+    type: [{ type: Schema.Types.ObjectId, ref: "Payment" }],
     required:true,
   },
   course: {
