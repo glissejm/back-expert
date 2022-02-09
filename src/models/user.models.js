@@ -26,10 +26,6 @@ const userSchema = new Schema({
     type: [{ type: Schema.Types.ObjectId, ref: "Progress" }],
     required: true,
   },
-  // premiun: {
-  //   type: Boolean,
-  //   required: true,
-  // },
 });
 
 
