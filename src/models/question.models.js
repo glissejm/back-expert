@@ -5,15 +5,34 @@ const questionSchema = new Schema({
     type: String,
     required: true,
   },
-  topic: {
-    type: String,
+  course: {
+    type: [{ type: Schema.Types.ObjectId, ref: "Course" }],
     required: true,
   },
   difficult: {
     type: String,
     required: true,
   },
-  //many items are missing
+  content: {
+    type: Object,
+    required: true,
+  },
+  solution: {
+    type: [{ type: Schema.Types.ObjectId, ref: "Solution" }],
+    required: true,
+  },
+  video: {
+    type: String,
+    required: true,
+  },
+  option: {
+    type: [{ type: Schema.Types.ObjectId, ref: "Option" }],
+    required: true,
+  },
+  status: {
+    type: Boolean,
+    required: true,
+  }
 });
 
 const Question = model("Question", questionSchema);
