@@ -8,7 +8,15 @@ const courseSchema = new Schema({
     topic: {
         type: String,
         required: true,
-    }    
+    },
+    questions: {
+        type: [{ type: Schema.Types.ObjectId, ref: "Question" }],
+        required: true,
+    },
+    completed: {
+        type: Boolean,
+        required: true,
+    }
   
 });
 
