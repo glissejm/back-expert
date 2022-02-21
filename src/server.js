@@ -4,13 +4,22 @@ import { json, urlencoded } from "body-parser";
 import config from "./config";
 import { connect } from "./utils/db";
 import authRouter from "./routes/auth.router";
-
+import cookieParser from "cookie-parser";
+import cors from "cors";
 const app = express();
 
+//Cors configuration
+const URL = ["http://localhost:3000"];
+const corsOPtions = {
+  origin: URL,
+  optionsSuccessStatus: 200,
+  credentials: true,
+};
 //used
+app.use(cors(corsOPtions));
 app.use(json());
 app.use(urlencoded({ extended: true }));
-
+app.use(cookieParser());
 //routes
 //@signIn and signUp
 app.use("/", authRouter);

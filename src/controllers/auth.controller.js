@@ -3,8 +3,8 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import config from "../config";
 
-//not complete yet
 export const newToken = (user) => {
+  //used the id of the new user fot the protect routes
   return jwt.sign({ id: user._id }, config.secrets.jwt, {
     expiresIn: config.secrets.jwtExp,
   });
@@ -31,7 +31,15 @@ export async function signUp(req, res) {
     //token is generated
     const token = newToken(user);
     // response the token for the user, this is the payload in this case
-    res.status(201).json({ token });
+    //res.status(201).json({ token });
+    res
+      .status(201)
+      .cookie("SECURE_ACCESS", token, {
+        httpOnly: true,
+        path: "/",
+        secure: true,
+      })
+      .json({ message: "User was created successfully" });
   } catch (e) {
     res.status(404).json({ message: "User couldn't be created" });
   }
@@ -54,8 +62,44 @@ export async function signIn(req, res) {
     }
     // response the token for the user
     const token = newToken(user);
-    res.status(201).json({ token });
+
+    res
+      .status(201)
+      .cookie("SECURE_ACCESS", token, {
+        httpOnly: true,
+        path: "/",
+        secure: true,
+      })
+      .json({ message: "User was login successfully" }); // here also return the user body
   } catch (e) {
     res.status(404).json({ message: "User couldn't be login, NO AUTH" });
+  }
+}
+
+//function to protect route
+export async function protect(req, res) {
+  try {
+    //verify the token
+    const token = req.cookies.SECURE_ACCESS;
+    if (!token) {
+      res.status(404).json({ message: "You have to send the token" });
+    }
+    const payload = await verifyToken(token);
+    //this function is not complete yet
+    //we can use payload.id === _id for mongo
+    // the body of payload is:
+    //{ id: '6213dd7d59305e3f14a64b15', iat: 1645469053, exp: 1645469063 }
+    //then we can do the things that we need to do
+    //access to the database and other things
+
+    /*
+    //this code is for tests only
+    //const user = await User.findOne({ _id: payload.id });
+    //const { name, email } = user;
+    //res.status(201).json({ email, name });
+    */
+    res.status(201).json({ message: "You can view this information" });
+  } catch (e) {
+    res.status(404).json({ message: "You cannot access to this route" });
   }
 }
