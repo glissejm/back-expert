@@ -1,22 +1,6 @@
 import { User } from "../models/user.model";
-import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import config from "../config";
-
-export const newToken = (user) => {
-  //used the id of the new user fot the protect routes
-  return jwt.sign({ id: user._id }, config.secrets.jwt, {
-    expiresIn: config.secrets.jwtExp,
-  });
-};
-
-export const verifyToken = (token) =>
-  new Promise((resolve, reject) => {
-    jwt.verify(token, config.secrets.jwt, (err, payload) => {
-      if (err) return reject(err);
-      resolve(payload);
-    });
-  });
+import { newToken } from "../utils/middlewares/verifyToken";
 
 export async function signUp(req, res) {
   try {
@@ -79,26 +63,14 @@ export async function signIn(req, res) {
 //function to protect route
 export async function protect(req, res) {
   try {
-    //verify the token
-    const token = req.cookies.SECURE_ACCESS;
-    if (!token) {
-      res.status(404).json({ message: "You have to send the token" });
-    }
-    const payload = await verifyToken(token);
-    //this function is not complete yet
-    //we can use payload.id === _id for mongo
-    // the body of payload is:
-    //{ id: '6213dd7d59305e3f14a64b15', iat: 1645469053, exp: 1645469063 }
-    //then we can do the things that we need to do
-    //access to the database and other things
+    const _id = req.id;
 
-    /*
     //this code is for tests only
-    //const user = await User.findOne({ _id: payload.id });
-    //const { name, email } = user;
-    //res.status(201).json({ email, name });
-    */
-    res.status(201).json({ message: "You can view this information" });
+    const user = await User.findOne({ _id: _id });
+    const { name, email } = user;
+    res.status(201).json({ email, name });
+
+    //res.status(201).json({ message: "You can view this information" });
   } catch (e) {
     res.status(404).json({ message: "You cannot access to this route" });
   }
