@@ -39,6 +39,9 @@ export async function signIn(req, res) {
         .send({ message: "Email and password are required" });
     }
     const user = await User.findOne({ email });
+    //validated user
+    if (!user)
+      return res.status(400).send({ message: "User does not register" });
     //validated with bcrypt
     const isValid = await bcrypt.compare(password, user.password);
     if (!isValid) {
@@ -74,5 +77,4 @@ export async function protect(req, res) {
   } catch (e) {
     res.status(404).json({ message: "You cannot access to this route" });
   }
-}
- */
+} */

@@ -9,7 +9,7 @@ import cors from "cors";
 const app = express();
 
 //Cors configuration
-const URL = ["http://localhost:3000"];
+const URL = [process.env.URL];
 const corsOPtions = {
   origin: URL,
   optionsSuccessStatus: 200,
@@ -28,11 +28,11 @@ app.use("/", authRouter);
 export const start = async () => {
   try {
     //conecta con la base de datos
-    await connect();
+    connect();
     //se escucha el servidor en el puerto 3000
     app.listen(config.port, () => {
       console.log("Connect to database succesfully");
-      console.log("REST API on 3000");
+      console.log(`REST API on ${config.port}`);
     });
   } catch (e) {
     console.error(e);

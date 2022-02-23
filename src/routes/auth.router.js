@@ -1,8 +1,8 @@
 import express from "express";
 
 //import controllers
-import { signUp, signIn, protect } from "../controllers/auth.controller";
-// import { authVerify } from "../utils/middlewares/verifyToken";
+import { signUp, signIn } from "../controllers/auth.controller";
+//import { authVerify } from "../utils/middlewares/verifyToken";
 const router = express.Router();
 
 router.route("/signin").post(signIn);

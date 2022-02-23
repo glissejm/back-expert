@@ -1,6 +1,6 @@
 export const config = {
   secrets: {
-    jwt: "learneverything" || process.env.JWT_SECRET, // second option must be deleted
+    jwt: process.env.JWT_SECRET, // second option must be deleted
   },
-  dbUrl: "mongodb://localhost:27017/api-test",
+  dbUrl: process.env.dev_database,
 };
