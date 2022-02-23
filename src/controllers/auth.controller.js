@@ -60,7 +60,7 @@ export async function signIn(req, res) {
   }
 }
 
-//function to protect route
+/* //function to protect route, example
 export async function protect(req, res) {
   try {
     const _id = req.id;
@@ -75,3 +75,4 @@ export async function protect(req, res) {
     res.status(404).json({ message: "You cannot access to this route" });
   }
 }
+ */
