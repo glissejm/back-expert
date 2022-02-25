@@ -23,7 +23,7 @@ export async function signUp(req, res) {
         path: "/",
         secure: true,
       })
-      .json({ message: "User was created successfully" });
+      .json({ name, email });
   } catch (e) {
     res.status(404).json({ message: "User couldn't be created" });
   }
@@ -57,7 +57,7 @@ export async function signIn(req, res) {
         path: "/",
         secure: true,
       })
-      .json({ message: "User was login successfully" }); // here also return the user body
+      .json({ name: user.name, email: user.email }); // here also return the user body
   } catch (e) {
     res.status(404).json({ message: "User couldn't be login, NO AUTH" });
   }

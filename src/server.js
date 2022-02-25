@@ -9,7 +9,7 @@ import cors from "cors";
 const app = express();
 
 //Cors configuration
-const URL = [process.env.URL];
+const URL = ["http://localhost:3000"];
 const corsOPtions = {
   origin: URL,
   optionsSuccessStatus: 200,
