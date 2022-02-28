@@ -4,6 +4,7 @@ import { json, urlencoded } from "body-parser";
 import config from "./config";
 import { connect } from "./utils/db";
 import authRouter from "./routes/auth.router";
+import dashboardRouter from "./routes/dashboard.router";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 const app = express();
@@ -23,6 +24,7 @@ app.use(cookieParser());
 //routes
 //@signIn and signUp
 app.use("/", authRouter);
+app.use("/", dashboardRouter);
 
 //message when server start
 export const start = async () => {

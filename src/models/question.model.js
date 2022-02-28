@@ -6,7 +6,7 @@ const questionSchema = new Schema({
     required: true,
   },
   course: {
-    type: [{ type: Schema.Types.ObjectId, ref: "Course" }],
+    type: String, //[{ type: Schema.Types.ObjectId, ref: "Course" }],
     required: true,
   },
   difficult: {
@@ -15,26 +15,28 @@ const questionSchema = new Schema({
   },
   content: {
     type: Object,
-    required: true,
+    required: false,
   },
   solution: {
     type: [{ type: Schema.Types.ObjectId, ref: "Solution" }],
-    required: true,
+    required: false,
   },
   video: {
     type: String,
-    required: true,
+    required: false,
   },
   option: {
     type: [{ type: Schema.Types.ObjectId, ref: "Option" }],
-    required: true,
+    required: false,
   },
   status: {
     type: Boolean,
-    required: true,
-  }
+    required: false,
+  },
 });
 
 const Question = model("Question", questionSchema);
 
-export default Question;
+module.exports = {
+  Question,
+};
