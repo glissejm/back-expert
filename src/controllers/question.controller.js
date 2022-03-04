@@ -14,7 +14,7 @@ export async function getQuestions(req, res) {
     if (difficult !== undefined && course !== undefined) {
       request = { $and: [{ course }, { difficult }] };
     }
-    const questions = await Question.find(request);
+    const questions = await Question.find(request).limit(20);
     if (questions.length === 0) {
       return res.status(400).json({ message: "No questions" });
     }
