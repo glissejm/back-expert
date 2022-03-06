@@ -23,3 +23,15 @@ export async function getQuestions(req, res) {
     res.status(404).json({ message: "We cannot get questions, ERROR" });
   }
 }
+
+
+export async function getQuestion(req, res,next) {
+  try {
+    const question_u = await Question.findById(req.params.q_id)
+    res.status(201).json(question_u);
+  } catch (e) {
+    //console.log(e)
+    res.status(404).json({ message: "We cannot get this question, ERROR" });
+    next();
+  }
+}
