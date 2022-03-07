@@ -20,6 +20,7 @@ export async function authVerify(req, res, next) {
   try {
     //verify the token
     const token = req.cookies.SECURE_ACCESS;
+    //const queries = req.query;
     if (!token) {
       res.status(404).json({ message: "You have to send the token" });
     }
@@ -33,6 +34,7 @@ export async function authVerify(req, res, next) {
     //access to the database and other things
     if (payload) {
       req.id = payload.id;
+      //req.query = queries;
       next();
     } else {
       res.status(404).json({ message: "Your token is empty" });
