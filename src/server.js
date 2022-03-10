@@ -7,6 +7,7 @@ import authRouter from "./routes/auth.router";
 import dashboardRouter from "./routes/dashboard.router";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+
 const app = express();
 
 //Cors configuration

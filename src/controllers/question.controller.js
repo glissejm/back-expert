@@ -16,7 +16,7 @@ export async function getQuestions(req, res) {
     }
     const questions = await Question.find(request).limit(20);
     if (questions.length === 0) {
-      return res.status(400).json({ message: "No questions" });
+      return res.status(201).json([]);
     }
     res.status(201).json(questions);
   } catch (e) {
@@ -24,10 +24,9 @@ export async function getQuestions(req, res) {
   }
 }
 
-
-export async function getQuestion(req, res,next) {
+export async function getQuestion(req, res, next) {
   try {
-    const question_u = await Question.findById(req.params.q_id)
+    const question_u = await Question.findById(req.params.q_id);
     res.status(201).json(question_u);
   } catch (e) {
     //console.log(e)

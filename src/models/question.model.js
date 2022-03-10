@@ -9,28 +9,44 @@ const questionSchema = new Schema({
     type: String, //[{ type: Schema.Types.ObjectId, ref: "Course" }],
     required: true,
   },
+  topic: {
+    type: String,
+    required: true,
+  },
   difficult: {
     type: String,
     required: true,
   },
-  content: {
-    type: Object,
+  questionText: {
+    type: String,
     required: false,
   },
-  solution: {
-    type: [{ type: Schema.Types.ObjectId, ref: "Solution" }],
+  solutionText: {
+    type: String,
     required: false,
   },
   video: {
     type: String,
     required: false,
   },
-  option: {
-    type: [{ type: Schema.Types.ObjectId, ref: "Option" }],
+  option1: {
+    type: String,
     required: false,
   },
-  status: {
-    type: Boolean,
+  option2: {
+    type: String,
+    required: false,
+  },
+  option3: {
+    type: String,
+    required: false,
+  },
+  option4: {
+    type: String,
+    required: false,
+  },
+  option5: {
+    type: String,
     required: false,
   },
 });
