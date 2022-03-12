@@ -7,7 +7,7 @@ const router = express.Router();
 //get questions default
 router.route("/dashboard").get(authVerify, getQuestions);
 
-router.route("/dashboard/:q_id").get(getQuestion);
+router.route("/dashboard/:q_id").get(authVerify, getQuestion);
 //routers protected
 //model of routers protected
 //router.route("/user").get(authVerify, protect);

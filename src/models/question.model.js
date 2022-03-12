@@ -29,26 +29,78 @@ const questionSchema = new Schema({
     type: String,
     required: false,
   },
-  option1: {
-    type: String,
-    required: false,
-  },
-  option2: {
-    type: String,
-    required: false,
-  },
-  option3: {
-    type: String,
-    required: false,
-  },
-  option4: {
-    type: String,
-    required: false,
-  },
-  option5: {
-    type: String,
-    required: false,
-  },
+  opciones: [
+    {
+      name: {
+        type: String,
+        required: false,
+      },
+      value: {
+        type: String,
+        required: false,
+      },
+      correct: {
+        type: Boolean,
+        required: false,
+      },
+    },
+    {
+      name: {
+        type: String,
+        required: false,
+      },
+      value: {
+        type: String,
+        required: false,
+      },
+      correct: {
+        type: Boolean,
+        required: false,
+      },
+    },
+    {
+      name: {
+        type: String,
+        required: false,
+      },
+      value: {
+        type: String,
+        required: false,
+      },
+      correct: {
+        type: Boolean,
+        required: false,
+      },
+    },
+    {
+      name: {
+        type: String,
+        required: false,
+      },
+      value: {
+        type: String,
+        required: false,
+      },
+      correct: {
+        type: Boolean,
+        required: false,
+      },
+    },
+    {
+      name: {
+        type: String,
+        required: false,
+      },
+      value: {
+        type: String,
+        required: false,
+      },
+      correct: {
+        type: Boolean,
+        required: false,
+      },
+    },
+  ],
 });
 
 const Question = model("Question", questionSchema);
