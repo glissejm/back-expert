@@ -5,6 +5,7 @@ import config from "./config";
 import { connect } from "./utils/db";
 import authRouter from "./routes/auth.router";
 import dashboardRouter from "./routes/dashboard.router";
+import userRouter from "./routes/user.router";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
@@ -26,6 +27,7 @@ app.use(cookieParser());
 //@signIn and signUp
 app.use("/", authRouter);
 app.use("/", dashboardRouter);
+app.use("/", userRouter);
 
 //message when server start
 export const start = async () => {
