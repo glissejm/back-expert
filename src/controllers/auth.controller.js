@@ -1,6 +1,6 @@
-import { User } from "../models/user.model";
-import bcrypt from "bcrypt";
-import { newToken } from "../utils/middlewares/verifyToken";
+import { User } from '../models/user.model';
+import bcrypt from 'bcrypt';
+import { newToken } from '../utils/middlewares/verifyToken';
 
 export async function signUp(req, res) {
   try {
@@ -18,9 +18,9 @@ export async function signUp(req, res) {
     //res.status(201).json({ token });
     res
       .status(201)
-      .cookie("SECURE_ACCESS", token, {
+      .cookie('SECURE_ACCESS', token, {
         httpOnly: true,
-        path: "/",
+        path: '/',
         secure: true,
       })
       .json({ name, email });
@@ -36,25 +36,25 @@ export async function signIn(req, res) {
     if (!email || !password) {
       return res
         .status(400)
-        .send({ message: "Email and password are required" });
+        .send({ message: 'Email and password are required' });
     }
     const user = await User.findOne({ email });
     //validated user
     if (!user)
-      return res.status(400).send({ message: "User does not register" });
+      return res.status(400).send({ message: 'User does not register' });
     //validated with bcrypt
     const isValid = await bcrypt.compare(password, user.password);
     if (!isValid) {
-      return res.status(401).send({ message: "NOT AUTH" });
+      return res.status(401).send({ message: 'NOT AUTH' });
     }
     // response the token for the user
     const token = newToken(user);
 
     res
       .status(201)
-      .cookie("SECURE_ACCESS", token, {
+      .cookie('SECURE_ACCESS', token, {
         httpOnly: true,
-        path: "/",
+        path: '/',
         secure: true,
       })
       .json({ name: user.name, email: user.email }); // here also return the user body
@@ -62,7 +62,6 @@ export async function signIn(req, res) {
     res.status(404).json({ message: "User couldn't be login, NO AUTH" });
   }
 }
-
 /* //function to protect route, example
 export async function protect(req, res) {
   try {
