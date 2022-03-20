@@ -6,6 +6,7 @@ import {
   signIn,
   loginGoogle,
   registerGoogle,
+  logout,
 } from "../controllers/auth.controller";
 import { firstVerify } from "../utils/middlewares/verifyToken";
 //import { authVerify } from "../utils/middlewares/verifyToken";
@@ -16,6 +17,7 @@ router.route("/signup").post(signUp);
 router.route("/logingoogle").post(loginGoogle);
 router.route("/registergoogle").post(registerGoogle);
 router.route("/verify").get(firstVerify);
+router.route("/logout").get(logout);
 //routers protected
 //model of routers protected
 //router.route("/user").get(authVerify, protect);

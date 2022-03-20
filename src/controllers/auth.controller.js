@@ -64,6 +64,21 @@ export async function signIn(req, res) {
   }
 }
 
+export async function logout(req, res) {
+  try {
+    res
+      .status(201)
+      .cookie("SECURE_ACCESS", "", {
+        httpOnly: true,
+        path: "/",
+        secure: true,
+      })
+      .json({ message: "User logout complete" });
+  } catch (e) {
+    res.status(404).json({ message: "User couldn't be logout" });
+  }
+}
+
 //auth with google
 export async function loginGoogle(req, res) {
   try {
