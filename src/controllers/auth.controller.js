@@ -183,18 +183,3 @@ export async function registerGoogle(req, res) {
     res.status(400).json({ message: "No se pudo crear el usuario con google" });
   }
 }
-/* //function to protect route, example
-export async function protect(req, res) {
-  try {
-    const _id = req.id;
-
-    //this code is for tests only
-    const user = await User.findOne({ _id: _id });
-    const { name, email } = user;
-    res.status(201).json({ email, name });
-
-    //res.status(201).json({ message: "You can view this information" });
-  } catch (e) {
-    res.status(404).json({ message: "You cannot access to this route" });
-  }
-} */
