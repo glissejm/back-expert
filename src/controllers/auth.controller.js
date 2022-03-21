@@ -1,6 +1,7 @@
 import { User } from '../models/user.model';
 import bcrypt from 'bcrypt';
 import { newToken } from '../utils/middlewares/verifyToken';
+import { sendMail } from '../utils/middlewares/mailer';
 
 export async function signUp(req, res) {
   try {
@@ -16,6 +17,7 @@ export async function signUp(req, res) {
     const token = newToken(user);
     // response the token for the user, this is the payload in this case
     //res.status(201).json({ token });
+    await sendMail(user);
     res
       .status(201)
       .cookie('SECURE_ACCESS', token, {
