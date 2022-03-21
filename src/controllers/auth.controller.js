@@ -7,6 +7,15 @@ export async function signUp(req, res) {
   try {
     //register for the new users
     const { email, name, password } = req.body;
+    //first verify if there is a user with that email
+    const user0 = await User.findOne({ email: email });
+    if (user0) {
+      return res.status(404).json({
+        message:
+          "No puedes usar este correo porque ya está en uso, prueba con otro",
+      });
+    }
+    //second step
     const encryptPassword = await bcrypt.hash(password, 8);
     const user = await User.create({
       name,
@@ -37,16 +46,15 @@ export async function signIn(req, res) {
     if (!email || !password) {
       return res
         .status(400)
-        .send({ message: "Email and password are required" });
+        .json({ message: "No ingresó email y/o contraseña" });
     }
     const user = await User.findOne({ email });
     //validated user
-    if (!user)
-      return res.status(400).send({ message: "User does not register" });
+    if (!user) return res.status(400).json({ message: "El usuario no existe" });
     //validated with bcrypt
     const isValid = await bcrypt.compare(password, user.password);
     if (!isValid) {
-      return res.status(401).send({ message: "NOT AUTH" });
+      return res.status(401).json({ message: "NOT AUTH" });
     }
     // response the token for the user
     const token = newToken(user);
@@ -165,7 +173,7 @@ export async function registerGoogle(req, res) {
     if (user) {
       return res.status(400).json({
         message:
-          "El usuario ya existe, por favor, use otra cuenta o inicie sesión con esa cuenta",
+          "El usuario ya existe, inicie sesión con esa cuenta o elija otro email para crear una nueva cuenta",
       });
     }
     //create a token
