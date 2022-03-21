@@ -3,7 +3,7 @@ import { model, Schema } from "mongoose";
 const userSchema = new Schema({
   name: {
     type: String,
-    required: true,
+    required: false,
   },
   email: {
     type: String,
@@ -11,7 +11,7 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    required: true,
+    required: false,
   },
   payment: {
     type: [{ type: Schema.Types.ObjectId, ref: "Payment" }],
