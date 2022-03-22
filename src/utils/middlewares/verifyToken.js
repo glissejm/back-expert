@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { User } from "../../models/user.model";
 import config from "../../config";
 
 export const newToken = (user) => {
@@ -22,7 +23,7 @@ export async function authVerify(req, res, next) {
     const token = req.cookies.SECURE_ACCESS;
     //const queries = req.query;
     if (!token) {
-      res.status(404).json({ message: "You have to send the token" });
+      return res.status(404).json({ message: "You have to send the token" });
     }
     //if token has expired then ?
     const payload = await verifyToken(token);
@@ -37,7 +38,31 @@ export async function authVerify(req, res, next) {
       //req.query = queries;
       next();
     } else {
-      res.status(404).json({ message: "Your token is empty" });
+      return res.status(404).json({ message: "Your token is empty" });
+    }
+  } catch (e) {
+    res.status(404).json({ message: "Your token is not verified" });
+  }
+}
+
+export async function firstVerify(req, res) {
+  try {
+    const token = req.cookies.SECURE_ACCESS;
+    if (!token) {
+      return res.status(400).json({ message: "No token" });
+    }
+    const payload = await verifyToken(token);
+    if (payload) {
+      const user_id = payload.id;
+      const user = await User.findOne({ _id: user_id });
+      if (!user) {
+        return res.status(400).json({ message: "No user" });
+      }
+      return res
+        .status(200)
+        .json({ message: "continue", name: user.name, email: user.email });
+    } else {
+      return res.status(400).json({ message: "No auth" });
     }
   } catch (e) {
     res.status(404).json({ message: "Your token is not verified" });
