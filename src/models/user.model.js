@@ -12,6 +12,7 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: false,
+    default: "",
   },
   payment: {
     type: [{ type: Schema.Types.ObjectId, ref: "Payment" }],

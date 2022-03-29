@@ -2,7 +2,7 @@ import { User } from "../models/user.model";
 import bcrypt from "bcrypt";
 import { OAuth2Client } from "google-auth-library";
 import { newToken } from "../utils/middlewares/verifyToken";
-import { sendMail } from '../utils/middlewares/mailer';
+import { sendMail } from "../utils/middlewares/mailer";
 
 export async function signUp(req, res) {
   try {
@@ -56,7 +56,9 @@ export async function signIn(req, res) {
     //validated with bcrypt
     const isValid = await bcrypt.compare(password, user.password);
     if (!isValid) {
-      return res.status(401).json({ message: "NOT AUTH" });
+      return res
+        .status(401)
+        .json({ message: "Usuario o contraseña incorrecta" });
     }
     // response the token for the user
     const token = newToken(user);
@@ -78,11 +80,7 @@ export async function logout(req, res) {
   try {
     res
       .status(201)
-      .cookie("SECURE_ACCESS", "", {
-        httpOnly: true,
-        path: "/",
-        secure: true,
-      })
+      .clearCookie("SECURE_ACCESS")
       .json({ message: "User logout complete" });
   } catch (e) {
     res.status(404).json({ message: "User couldn't be logout" });
