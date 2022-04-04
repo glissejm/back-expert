@@ -35,6 +35,8 @@ export async function authVerify(req, res, next) {
     //access to the database and other things
     if (payload) {
       req.body.id = payload.id;
+      console.log("Middleware de auth", payload.email, payload.id)
+      req.body.email = payload.email;
       //req.query = queries;
       next();
     } else {
