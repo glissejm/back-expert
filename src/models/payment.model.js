@@ -10,7 +10,8 @@ const paymentSchema = new Schema(
         },
       ],
     },
-    status: Boolean,
+    status: String,
+    status_detail: String,
   },
   {
     timestamps: true,
