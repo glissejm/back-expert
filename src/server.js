@@ -10,10 +10,8 @@ import cors from "cors";
 
 const app = express();
 
-//Cors configuration
-const URL = ["http://localhost:3000"];
 const corsOPtions = {
-  origin: URL,
+  origin: process.env.URL_FRONT,
   optionsSuccessStatus: 200,
   credentials: true,
 };
@@ -28,5 +26,4 @@ app.use("/", authRouter);
 app.use("/", dashboardRouter);
 app.use("/", userRouter);
 
-
-export default app
+export default app;

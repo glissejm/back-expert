@@ -1,4 +1,3 @@
-
 import { User } from "../models/user.model";
 import bcrypt from "bcrypt";
 import { OAuth2Client } from "google-auth-library";
@@ -6,7 +5,6 @@ import { newToken } from "../utils/middlewares/verifyToken";
 import { welcomeMailFirst } from "../utils/middlewares/welcomeMail";
 import { recoveryPassword } from "../utils/middlewares/password_recovery";
 const jwt = require("jsonwebtoken");
-import res from "express/lib/response";
 
 export async function signUp(req, res) {
   try {
@@ -31,7 +29,7 @@ export async function signUp(req, res) {
     const token = newToken(user);
     // response the token for the user, this is the payload in this case
     //res.status(201).json({ token });
-    console.log("AQUI CREATED")
+    console.log("AQUI CREATED");
     await welcomeMailFirst(user);
     res
       .status(201)
@@ -42,7 +40,7 @@ export async function signUp(req, res) {
       })
       .json({ name, email });
   } catch (e) {
-    console.log(e)
+    console.log(e);
     res.status(404).json({ message: "User couldn't be created" });
   }
 }
@@ -198,13 +196,12 @@ export async function registerGoogle(req, res) {
   }
 }
 
-
-export async function recoveryPasswordController(req,res) {
+export async function recoveryPasswordController(req, res) {
   try {
-    const {email} = req.body
-    const user = await User.findOne({email});
+    const { email } = req.body;
+    const user = await User.findOne({ email });
 
-    if(!user) {
+    if (!user) {
       throw new Error("User not found");
     }
 
@@ -212,35 +209,32 @@ export async function recoveryPasswordController(req,res) {
       expiresIn: "15m",
     });
 
-    res.status(201).json({message:"Email sent"});
-    await recoveryPassword(email,token)
- 
+    await recoveryPassword(email, token);
+
+    res.status(201).json({ message: "Email sent" });
   } catch (err) {
     //console.log(err)
-    res.status(400).json({message: "Error sending recovery page"});
+    res.status(400).json({ message: "Error sending recovery page" });
   }
-};
+}
 
-export async function resetPassword(req,res) {
-  try{
-    
-    const {passwordAgain,email} = req.body;
-    const user = await User.findOne({email});
-    const encryptPassword = await bcrypt.hash(passwordAgain,8);
-    
+export async function resetPassword(req, res) {
+  try {
+    const { passwordAgain, email } = req.body;
+    const user = await User.findOne({ email });
+    const encryptPassword = await bcrypt.hash(passwordAgain, 8);
+
     await User.findByIdAndUpdate(
       user._id,
-      {password:encryptPassword},  
+      { password: encryptPassword },
       {
-        new:true,
-        userFindAndModify:false,
+        new: true,
+        userFindAndModify: false,
       }
-    )
-
-  } catch(err) {
+    );
+    res.status(200).json({ message: "task complete" });
+  } catch (err) {
     //console.log(err)
-    res.status(400).json({message:"Password could not be update"});
-    
+    res.status(400).json({ message: "Password could not be update" });
   }
-
 }
