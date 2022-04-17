@@ -7,6 +7,14 @@ import dashboardRouter from "./routes/dashboard.router";
 import userRouter from "./routes/user.router";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import cloudinary from "cloudinary";
+import fs from "fs-extra";
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+})
 
 const app = express();
 
@@ -18,6 +26,7 @@ const corsOPtions = {
   credentials: true,
 };
 //used
+
 app.use(cors(corsOPtions));
 app.use(json());
 app.use(urlencoded({ extended: true }));
@@ -30,3 +39,4 @@ app.use("/", userRouter);
 
 
 export default app
+

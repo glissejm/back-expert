@@ -29,6 +29,16 @@ const userSchema = new Schema({
     required: true,
     default: [],
   },
+  profileImg: {
+    type: String,
+    required: true,
+    default: "Not found",
+  },
+  cloud_id: {
+    type: String,
+    required: true,
+    default: "Not found",
+  },
 });
 
 const User = model("User", userSchema);
