@@ -212,35 +212,32 @@ export async function recoveryPasswordController(req,res) {
       expiresIn: "15m",
     });
 
-    res.status(201).json({message:"Email sent"});
-    await recoveryPassword(email,token)
- 
+    await recoveryPassword(email, token);
+
+    res.status(201).json({ message: "Email sent" });
   } catch (err) {
     //console.log(err)
-    res.status(400).json({message: "Error sending recovery page"});
+    res.status(400).json({ message: "Error sending recovery page" });
   }
-};
+}
 
-export async function resetPassword(req,res) {
-  try{
-    
-    const {passwordAgain,email} = req.body;
-    const user = await User.findOne({email});
-    const encryptPassword = await bcrypt.hash(passwordAgain,8);
-    
+export async function resetPassword(req, res) {
+  try {
+    const { passwordAgain, email } = req.body;
+    const user = await User.findOne({ email });
+    const encryptPassword = await bcrypt.hash(passwordAgain, 8);
+
     await User.findByIdAndUpdate(
       user._id,
-      {password:encryptPassword},  
+      { password: encryptPassword },
       {
-        new:true,
-        userFindAndModify:false,
+        new: true,
+        userFindAndModify: false,
       }
-    )
-
-  } catch(err) {
+    );
+    res.status(200).json({ message: "task complete" });
+  } catch (err) {
     //console.log(err)
-    res.status(400).json({message:"Password could not be update"});
-    
+    res.status(400).json({ message: "Password could not be update" });
   }
-
 }
