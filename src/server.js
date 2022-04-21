@@ -6,6 +6,7 @@ import authRouter from "./routes/auth.router";
 import dashboardRouter from "./routes/dashboard.router";
 import userRouter from "./routes/user.router";
 import paymentRouter from "./routes/payment.router";
+import planRouter from "./routes/plan.router";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import cloudinary from "cloudinary";
@@ -36,5 +37,6 @@ app.use("/", authRouter);
 app.use("/", dashboardRouter);
 app.use("/", userRouter);
 app.use("/", paymentRouter);
+app.use("/", planRouter);
 
 export default app
