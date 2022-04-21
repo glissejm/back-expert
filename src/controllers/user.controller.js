@@ -82,3 +82,22 @@ export async function verifyPassword(req, res) {
       .json({ message: "La contraseña que ingresaste es incorrecta" });
   }
 }
+
+//function to add new question solved to the array
+export async function addQuestion(req, res) {
+  try {
+    //id: user, idquestion: question
+    const { idquestion, id } = req.body;
+    //we need to add the idquestion to the array in the user
+    const user = await User.findOneAndUpdate(
+      { _id: id },
+      { $push: { progress: idquestion } }
+    );
+
+    res.status(200).json(user);
+  } catch (e) {
+    res
+      .status(400)
+      .json({ message: "No podemos agregar esta pregunta, ocurrió un erorr" });
+  }
+}
