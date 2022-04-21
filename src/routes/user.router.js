@@ -1,23 +1,26 @@
 import express from "express";
+
 //import controllers
 import {
-  getUser,
+  verifyPassword,
+  getInfoUser,
   updateUser,
-  deleteUser,
-  getUserEmail,
+  upload,
+  uploadImage,
+  addQuestion,
 } from "../controllers/user.controller";
 import { authVerify } from "../utils/middlewares/verifyToken";
 const router = express.Router();
 
-//get questions default
-
 router
-  .route("/user/:user_id")
-  .get(authVerify, getUser)
-  .put(authVerify, updateUser)
-  .delete(authVerify, deleteUser);
+  .route("/password")
+  .post(authVerify, verifyPassword)
+  .get(authVerify, getInfoUser)
+  .put(authVerify, updateUser);
 
-router.route("/email/:email").get(authVerify, getUserEmail);
+router.put("/imageUpload", uploadImage, upload);
+//router.route("/imageUpload").post(changeImage,upload.single('profileImg'))
+router.route("/addquestion").post(authVerify, addQuestion);
 //routers protected
 //model of routers protected
 //router.route("/user").get(authVerify, protect);

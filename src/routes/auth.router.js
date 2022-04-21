@@ -7,9 +7,12 @@ import {
   loginGoogle,
   registerGoogle,
   logout,
+  recoveryPasswordController,
+  resetPassword,
 } from "../controllers/auth.controller";
 import { firstVerify } from "../utils/middlewares/verifyToken";
 import { authVerify } from "../utils/middlewares/verifyToken";
+import {auth} from "../utils/middlewares/auth"
 const router = express.Router();
 
 router.route("/signin").post(signIn);
@@ -18,6 +21,8 @@ router.route("/logingoogle").post(loginGoogle);
 router.route("/registergoogle").post(registerGoogle);
 router.route("/verify").get(firstVerify);
 router.route("/logout").get(authVerify, logout);
+router.route("/users/recovery-password").post(recoveryPasswordController);
+router.route("/users/reset-password").put(auth,resetPassword)
 //routers protected
 //model of routers protected
 //router.route("/user").get(authVerify, protect);
