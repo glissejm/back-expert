@@ -3,8 +3,7 @@ import bcrypt from "bcrypt";
 import cloudinary from "cloudinary";
 import fs from "fs-extra";
 const multer = require("multer");
-const { uuid } = require('uuidv4');
-
+const { uuid } = require("uuidv4");
 
 export async function getInfoUser(req, res) {
   try {
@@ -16,9 +15,13 @@ export async function getInfoUser(req, res) {
       });
     }
     if (currentUser.password !== "") {
-      return res.status(201).json({ message: "noGoogle" , imgProfile: currentUser.profileImg});
+      return res
+        .status(201)
+        .json({ message: "noGoogle", imgProfile: currentUser.profileImg });
     }
-    res.status(201).json({ message: "Google" , imgProfile: currentUser.profileImg});
+    res
+      .status(201)
+      .json({ message: "Google", imgProfile: currentUser.profileImg });
   } catch (e) {
     res.status(404).json({ message: "Ocurrió un error" });
   }
@@ -88,51 +91,71 @@ export async function verifyPassword(req, res) {
   }
 }
 
-
 const storage = multer.diskStorage({
-  destination: (req,file,cb) => {
-    cb(null,"uploads/")
+  destination: (req, file, cb) => {
+    cb(null, "uploads/");
   },
-  filename: (req,file,cb) => {
-    const filenName = file.originalname.toLocaleLowerCase().split(' ').join('-');
-    cb(null,uuid()+'-'+filenName)
-  }
+  filename: (req, file, cb) => {
+    const filenName = file.originalname
+      .toLocaleLowerCase()
+      .split(" ")
+      .join("-");
+    cb(null, uuid() + "-" + filenName);
+  },
 });
 const upload = multer({
   storage: storage,
-  fileFilter: (req,file,cb) => {
-    if(file.mimetype =="image/png" || file.mimetype=="image/jpg" || file.mimetype == "image/jpeg"){
-      cb(null,true);
+  fileFilter: (req, file, cb) => {
+    if (
+      file.mimetype == "image/png" ||
+      file.mimetype == "image/jpg" ||
+      file.mimetype == "image/jpeg"
+    ) {
+      cb(null, true);
     } else {
-      cb(null,false);
-      return cb(new Error('Only .png, .jpg and .jpeg format allowed'))
+      cb(null, false);
+      return cb(new Error("Only .png, .jpg and .jpeg format allowed"));
     }
-  }
-})
+  },
+});
 
+exports.uploadImage = upload.single("photo");
 
-exports.uploadImage = upload.single('photo');
-
-exports.upload = async (req,res) => {
-
-  const url = req.protocol +'://' + req.get('host')
+exports.upload = async (req, res) => {
+  const url = req.protocol + "://" + req.get("host");
   const email = req.body.email;
 
   const result = await cloudinary.v2.uploader.upload(req.file.path);
-  
+
   await User.findOneAndUpdate(
     { email: email },
     {
       profileImg: result.url,
-      cloud_id: result.public_id
+      cloud_id: result.public_id,
     }
   );
-  await fs.unlink(req.file.path)
+  await fs.unlink(req.file.path);
 
-  res.status(200).json(({
-    success : "Success"
-  }))
+  res.status(200).json({
+    success: "Success",
+  });
+};
 
+//function to add new question solved to the array
+export async function addQuestion(req, res) {
+  try {
+    //id: user, idquestion: question
+    const { idquestion, id } = req.body;
+    //we need to add the idquestion to the array in the user
+    const user = await User.findOneAndUpdate(
+      { _id: id },
+      { $push: { progress: idquestion } }
+    );
 
- 
+    res.status(200).json(user);
+  } catch (e) {
+    res
+      .status(400)
+      .json({ message: "No podemos agregar esta pregunta, ocurrió un erorr" });
+  }
 }
