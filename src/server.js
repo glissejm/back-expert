@@ -9,17 +9,24 @@ import paymentRouter from "./routes/payment.router";
 import planRouter from "./routes/plan.router";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import cloudinary from "cloudinary";
+import fs from "fs-extra";
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+})
 
 const app = express();
 
-//Cors configuration
-const URL = ["http://localhost:3000"];
 const corsOPtions = {
-  origin: URL,
+  origin: process.env.URL_FRONT,
   optionsSuccessStatus: 200,
   credentials: true,
 };
 //used
+
 app.use(cors(corsOPtions));
 app.use(json());
 app.use(urlencoded({ extended: true }));

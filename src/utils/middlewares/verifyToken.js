@@ -32,9 +32,10 @@ export async function authVerify(req, res, next) {
     // the body of payload is:
     //{ id: '6213dd7d59305e3f14a64b15', iat: 1645469053, exp: 1645469063 }
     //then we can do the things that we need to do
-    //access to the database and other things
+    //access to the database and other things|  
     if (payload) {
-      req.id = payload.id;
+      req.body.id = payload.id;
+      req.body.email = payload.email;
       //req.query = queries;
       next();
     } else {
@@ -62,9 +63,9 @@ export async function firstVerify(req, res) {
         .status(200)
         .json({ message: "continue", name: user.name, email: user.email });
     } else {
-      return res.status(400).json({ message: "No auth" });
+      return res.status(400).json({ message: "No autenticado" });
     }
   } catch (e) {
-    res.status(404).json({ message: "Your token is not verified" });
+    res.status(404).json({ message: "El token no está verificado" });
   }
 }

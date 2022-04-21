@@ -12,6 +12,7 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: false,
+    default: "",
   },
   payment: {
     type: [{ type: Schema.Types.ObjectId, ref: "Payment" }],
@@ -27,6 +28,16 @@ const userSchema = new Schema({
     type: [{ type: Schema.Types.ObjectId, ref: "Progress" }],
     required: true,
     default: [],
+  },
+  profileImg: {
+    type: String,
+    required: true,
+    default: "Not found",
+  },
+  cloud_id: {
+    type: String,
+    required: true,
+    default: "Not found",
   },
 });
 
