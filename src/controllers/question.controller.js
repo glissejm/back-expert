@@ -54,3 +54,18 @@ export async function getProgress(req, res) {
     res.status(404).json({ message: "We cannot get this question, ERROR" });
   }
 }
+
+export async function getIdProgress(req, res) {
+  try {
+    const { id } = req.body;
+    const user = await User.findById({ _id: id });
+    if (!user) {
+      res.status(404).json({ message: "We cannot get the user, ERROR" });
+    }
+    const { progress } = user;
+
+    res.status(200).json(progress);
+  } catch (e) {
+    res.status(404).json({ message: "We cannot get this question, ERROR" });
+  }
+}
