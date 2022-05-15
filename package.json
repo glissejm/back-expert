@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec npx babel-node src/index",
-    "test": "set NODE_OPTIONS=--experimental-vm-modules && jest --detectOpenHandles --forceExit"
+    "start": "node --exec npx babel-node src/index",
+    "start:dev": "nodemon --exec npx babel-node src/index",
+    "test": "set NODE_OPTIONS=--experimental-vm-modules && jest --detectOpenHandles --forceExit",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build"
   },
   "keywords": [],
   "author": "",
