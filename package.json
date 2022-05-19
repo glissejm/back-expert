@@ -7,6 +7,7 @@
     "node": "16.14.x",
     "npm": "8.3.x"
   },
+  "type": "module",
   "scripts": {
     "start": "node src/index",
     "start:dev": "nodemon --exec npx babel-node src/index",
