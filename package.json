@@ -3,14 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "engines": {
-    "node": "16.14.x",
-    "npm": "8.3.x"
-  },
-  "type": "module",
   "scripts": {
-    "start": "node src/index",
-    "start:dev": "nodemon --exec npx babel-node src/index",
+    "start": "nodemon --exec npx babel-node src/index",
     "test": "set NODE_OPTIONS=--experimental-vm-modules && jest --detectOpenHandles --forceExit"
   },
   "keywords": [],
@@ -20,7 +14,7 @@
     "@sendgrid/mail": "^7.6.2",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
-    "cloudinary": "^1.29.1",
+    "cloudinary": "^1.29.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
@@ -29,9 +23,9 @@
     "google-auth-library": "^7.14.1",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
+    "mercadopago": "^1.5.12",
     "mongoose": "^6.2.0",
     "multer": "^1.4.4",
-    "nodemon": "^2.0.15",
     "uuidv4": "^6.2.13"
   },
   "devDependencies": {
@@ -39,6 +33,7 @@
     "@babel/node": "^7.16.8",
     "@babel/preset-env": "^7.16.11",
     "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
     "supertest": "^6.2.2"
   }
 }

@@ -9,8 +9,7 @@
   "runOnChangeOnly": false,
   "watch": ["src/**/*.js", "src/**/*.graphql", "src/**/*.gql"],
   "env": {
-    "NODE_ENV": "development",
-    "NODE_PROD": "production"
+    "NODE_ENV": "development"
   },
   "ext": "js,json,graphql"
 }
