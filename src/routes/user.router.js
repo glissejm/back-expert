@@ -8,8 +8,8 @@ import {
   upload,
   uploadImage,
   addQuestion,
-} from "../controllers/user.controller";
-import { authVerify } from "../utils/middlewares/verifyToken";
+} from "../controllers/user.controller.js";
+import { authVerify } from "../utils/middlewares/verifyToken.js";
 const router = express.Router();
 
 router

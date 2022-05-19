@@ -1,4 +1,4 @@
-import { Payment } from "../models/payment.model";
+import { Payment } from "../models/payment.model.js";
 const mercadopago = require("mercadopago");
 
 export async function processPayment(req, res) {

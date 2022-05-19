@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
-import { User } from "../../models/user.model";
-import config from "../../config";
+import { User } from "../../models/user.model.js";
+import config from "../../config/index.js";
 
 export const newToken = (user) => {
   //used the id of the new user fot the protect routes

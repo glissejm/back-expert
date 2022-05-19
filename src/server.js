@@ -2,11 +2,11 @@ import "dotenv/config";
 import express from "express";
 import { json, urlencoded } from "body-parser";
 
-import authRouter from "./routes/auth.router";
-import dashboardRouter from "./routes/dashboard.router";
-import userRouter from "./routes/user.router";
-import paymentRouter from "./routes/payment.router";
-import planRouter from "./routes/plan.router";
+import authRouter from "./routes/auth.router.js";
+import dashboardRouter from "./routes/dashboard.router.js";
+import userRouter from "./routes/user.router.js";
+import paymentRouter from "./routes/payment.router.js";
+import planRouter from "./routes/plan.router.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import cloudinary from "cloudinary";

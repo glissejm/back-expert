@@ -9,10 +9,9 @@ import {
   logout,
   recoveryPasswordController,
   resetPassword,
-} from "../controllers/auth.controller";
-import { firstVerify } from "../utils/middlewares/verifyToken";
-import { authVerify } from "../utils/middlewares/verifyToken";
-import {auth} from "../utils/middlewares/auth"
+} from "../controllers/auth.controller.js";
+import { firstVerify, authVerify } from "../utils/middlewares/verifyToken.js";
+import {auth} from "../utils/middlewares/auth.js"
 const router = express.Router();
 
 router.route("/signin").post(signIn);

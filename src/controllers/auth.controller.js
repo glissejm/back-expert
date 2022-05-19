@@ -1,12 +1,11 @@
 
-import { User } from "../models/user.model";
+import { User } from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import { OAuth2Client } from "google-auth-library";
-import { newToken } from "../utils/middlewares/verifyToken";
-import { welcomeMailFirst } from "../utils/middlewares/welcomeMail";
-import { recoveryPassword } from "../utils/middlewares/password_recovery";
+import { newToken } from "../utils/middlewares/verifyToken.js";
+import { welcomeMailFirst } from "../utils/middlewares/welcomeMail.js";
+import { recoveryPassword } from "../utils/middlewares/password_recovery.js";
 const jwt = require("jsonwebtoken");
-import res from "express/lib/response";
 
 export async function signUp(req, res) {
   try {

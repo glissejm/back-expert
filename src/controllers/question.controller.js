@@ -1,5 +1,5 @@
-import { Question } from "../models/question.model";
-import { User } from "../models/user.model";
+import { Question } from "../models/question.model.js";
+import { User } from "../models/user.model.js";
 
 export async function getQuestions(req, res) {
   try {

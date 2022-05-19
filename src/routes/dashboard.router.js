@@ -5,8 +5,8 @@ import {
   getQuestion,
   getProgress,
   getIdProgress,
-} from "../controllers/question.controller";
-import { authVerify } from "../utils/middlewares/verifyToken";
+} from "../controllers/question.controller.js";
+import { authVerify } from "../utils/middlewares/verifyToken.js";
 const router = express.Router();
 
 //get questions default

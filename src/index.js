@@ -1,6 +1,6 @@
-import app from "./server";
-import { connect } from "./utils/db";
-import config from "./config";
+import app from "./server.js";
+import { connect } from "./utils/db.js";
+import config from "./config/index.js";
 
 const start = async () => {
   try {

@@ -1,4 +1,4 @@
-import { User } from "../models/user.model";
+import { User } from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import cloudinary from "cloudinary";
 import fs from "fs-extra";
